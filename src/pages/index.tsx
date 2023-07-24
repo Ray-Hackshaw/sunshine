@@ -1,4 +1,8 @@
 import Head from "next/head";
+import { Footer } from "~/components/Footer";
+import { Header } from "~/components/Header";
+import { Layout } from "~/components/Layout";
+import { Map } from "~/components/Map";
 import { api } from "~/utils/api";
 
 export default function Home() {
@@ -14,11 +18,11 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex bg-sun font-wix">
-        <div>
-          <p>Testing hello this new font is it working</p>
+      <Layout>
+        <div className="flex h-[800px] w-full font-wix">
+          <Map />
         </div>
-      </main>
+      </Layout>
     </>
   );
 }

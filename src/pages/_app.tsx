@@ -2,6 +2,7 @@ import { type AppType } from "next/app";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import localFont from "next/font/local";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 const Wix = localFont({
   src: [
