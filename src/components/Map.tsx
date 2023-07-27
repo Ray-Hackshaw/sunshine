@@ -5,7 +5,7 @@ import { env } from "~/env.mjs";
 export const Map = () => {
   const [map, setMap] = useState<mapboxgl.Map>();
   const [lng, setLng] = useState(20);
-  const [lat, setLat] = useState(20);
+  const [lat, setLat] = useState(15);
   const [zoom, setZoom] = useState(1.75);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export const Map = () => {
       style: "mapbox://styles/rhackshaw/clkgryts0002e01ohd79g0svm",
       center: [lng, lat],
       zoom: zoom,
-      minZoom: 1.3,
+      minZoom: 1.75,
       touchPitch: false,
       dragRotate: false,
       dragPan: false,
@@ -25,7 +25,7 @@ export const Map = () => {
   });
 
   return (
-    <div className="relative flex w-full">
+    <div className="relative flex h-screen w-full">
       <div id="map" className="w-full" />
     </div>
   );

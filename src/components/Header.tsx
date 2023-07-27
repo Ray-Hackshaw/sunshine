@@ -1,11 +1,11 @@
 export const Header = () => {
   return (
     <>
-      <footer className="sticky top-0 w-full bg-black px-20 py-8 text-cloud">
+      <header className="absolute top-0 z-20 w-full bg-black bg-opacity-20 px-20 py-4 font-wix text-cloud backdrop-blur">
         <div className="flex w-full justify-between">
-          <div className="text-xl">ISOHEL</div>
+          <div className="font-wix text-xl">ISOHEL</div>
         </div>
-      </footer>
+      </header>
     </>
   );
 };
