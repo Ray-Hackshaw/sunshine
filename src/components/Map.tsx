@@ -1,12 +1,47 @@
 import mapboxgl from "mapbox-gl";
 import { useEffect, useRef, useState } from "react";
 import { env } from "~/env.mjs";
+import {
+  auckland,
+  brisbane,
+  copenhagen,
+  melbourne,
+  newYork,
+  paris,
+  portugal,
+  tokyo,
+  toronto,
+} from "~/utils/cities";
+
+const isohels = [
+  {
+    firstPlace: auckland,
+    secondPlace: brisbane,
+  },
+  //   {
+  //     firstPlace: auckland,
+  //     secondPlace: melbourne,
+  //   },
+  {
+    firstPlace: paris,
+    secondPlace: newYork,
+  },
+  {
+    firstPlace: portugal,
+    secondPlace: melbourne,
+  },
+  {
+    firstPlace: copenhagen,
+    secondPlace: tokyo,
+  },
+  //   {
+  //     firstPlace: toronto,
+  //     secondPlace: brisbane,
+  //   },
+];
 
 export const Map = () => {
   const [map, setMap] = useState<mapboxgl.Map>();
-  const [lng, setLng] = useState(20);
-  const [lat, setLat] = useState(15);
-  const [zoom, setZoom] = useState(1.75);
 
   useEffect(() => {
     if (map) return; // initialize map only once
@@ -14,13 +49,40 @@ export const Map = () => {
       container: "map",
       accessToken: env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN,
       style: "mapbox://styles/rhackshaw/clkgryts0002e01ohd79g0svm",
-      center: [lng, lat],
-      zoom: zoom,
+      center: [20, 15],
+      zoom: 1.75,
       minZoom: 1.75,
-      touchPitch: false,
       dragRotate: false,
-      dragPan: false,
     });
+    newMap.on("load", () => {
+      isohels.forEach((isohel, i) => {
+        newMap.addSource(`${i}`, {
+          type: "geojson",
+          data: {
+            type: "Feature",
+            properties: {},
+            geometry: {
+              type: "LineString",
+              coordinates: [isohel.firstPlace, isohel.secondPlace],
+            },
+          },
+        });
+        newMap.addLayer({
+          id: `${i}`,
+          type: "line",
+          source: `${i}`,
+          layout: {
+            "line-join": "round",
+            "line-cap": "round",
+          },
+          paint: {
+            "line-color": "#FCA311",
+            "line-width": 2,
+          },
+        });
+      });
+    });
+
     setMap(newMap);
   });
 

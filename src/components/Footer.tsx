@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 const socialList = [
   {
@@ -37,8 +36,7 @@ export const Footer = () => {
   return (
     <>
       <footer className="absolute bottom-0 w-full bg-black bg-opacity-20 px-20 py-4 font-wix text-cloud backdrop-blur">
-        <div className="flex w-full justify-between">
-          <div className="text-xl">by Ray Hackshaw</div>
+        <div className="ml-auto mr-0 block w-full">
           <SocialLinks />
         </div>
       </footer>
