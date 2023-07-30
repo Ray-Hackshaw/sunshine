@@ -1,14 +1,3 @@
-export const Cities = [
-  {
-    name: "Auckland",
-    coordinates: [174.76318, -36.852095],
-  },
-  {
-    name: "Brisbane",
-    coordinates: [153.0228, -27.4697],
-  },
-];
-
 export const auckland = [174.76318, -36.852095];
 export const brisbane = [153.0228, -27.4697];
 export const melbourne = [144.963161, -37.814218];
@@ -18,3 +7,14 @@ export const toronto = [-73.891045, 40.646722];
 export const newYork = [-73.9866, 40.7306];
 export const paris = [2.3483915, 48.8534951];
 export const portugal = [-9.136592, 38.707751];
+export const losAngeles = [-118.242766, 34.053691];
+export const shanghai = [121.469098, 31.232234];
+export const jakarta = [106.827183, -6.1753942];
+export const moscow = [37.6174943, 55.7504461];
+export const seoul = [126.97810936771378, 37.566316529399074];
+export const istanbul = [28.966542168875037, 41.00879853442103];
+export const cairo = [31.235726, 30.044388];
+export const osaka = [135.501454, 34.693757];
+export const kyoto = [135.755607, 35.021041];
+export const madrid = [-3.703583, 40.416705];
+export const vancouver = [-123.11395559921081, 49.260849996098955];

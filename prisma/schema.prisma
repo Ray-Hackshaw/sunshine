@@ -3,7 +3,32 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
+}
+
+model sunlight {
+  lastUpdated Int @unique(map: "lastUpdated")
+  auckland    Int
+  brisbane    Int
+  melbourne   Int
+  tokyo       Int
+  copenhagen  Int
+  toronto     Int
+  newYork     Int
+  paris       Int
+  portugal    Int
+  losAngeles  Int
+  shanghai    Int
+  jakarta     Int
+  moscow      Int
+  seoul       Int
+  istanbul    Int
+  cairo       Int
+  osaka       Int
+  kyoto       Int
+  madrid      Int
+  vancouver   Int
+  Id          Int @id @default(autoincrement())
 }

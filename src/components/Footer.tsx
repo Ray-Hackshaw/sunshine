@@ -36,7 +36,7 @@ export const Footer = () => {
   return (
     <>
       <footer className="absolute bottom-0 w-full bg-black bg-opacity-20 px-20 py-4 font-wix text-cloud backdrop-blur">
-        <div className="ml-auto mr-0 block w-full">
+        <div className="flex w-full justify-end">
           <SocialLinks />
         </div>
       </footer>

@@ -1,5 +1,5 @@
 import mapboxgl from "mapbox-gl";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { env } from "~/env.mjs";
 import {
   auckland,
@@ -18,10 +18,6 @@ const isohels = [
     firstPlace: auckland,
     secondPlace: brisbane,
   },
-  //   {
-  //     firstPlace: auckland,
-  //     secondPlace: melbourne,
-  //   },
   {
     firstPlace: paris,
     secondPlace: newYork,
@@ -34,10 +30,6 @@ const isohels = [
     firstPlace: copenhagen,
     secondPlace: tokyo,
   },
-  //   {
-  //     firstPlace: toronto,
-  //     secondPlace: brisbane,
-  //   },
 ];
 
 export const Map = () => {
