@@ -1,16 +1,13 @@
 import mapboxgl from "mapbox-gl";
 import { useEffect, useState } from "react";
 import { env } from "~/env.mjs";
+import { Pairing } from "~/utils/calculateIsohels";
 import {
   auckland,
   brisbane,
   copenhagen,
   melbourne,
-  newYork,
-  paris,
-  portugal,
   tokyo,
-  toronto,
 } from "~/utils/cities";
 
 const isohels = [
@@ -19,20 +16,12 @@ const isohels = [
     secondPlace: brisbane,
   },
   {
-    firstPlace: paris,
-    secondPlace: newYork,
-  },
-  {
-    firstPlace: portugal,
-    secondPlace: melbourne,
-  },
-  {
     firstPlace: copenhagen,
     secondPlace: tokyo,
   },
 ];
 
-export const Map = () => {
+export const Map = ({ points }: { points: Pairing[] }) => {
   const [map, setMap] = useState<mapboxgl.Map>();
 
   useEffect(() => {

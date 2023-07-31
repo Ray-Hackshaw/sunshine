@@ -1,10 +1,11 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Layout } from "~/components/Layout";
 import { Map } from "~/components/Map";
 import { api } from "~/utils/api";
+import { Pairing, calculateIsohels } from "~/utils/calculateIsohels";
 
 const dayMs = 86400000;
 const currentTime = new Date().getTime();
@@ -18,7 +19,14 @@ const HomePage: NextPage = () => {
   const updateMutation = api.isohel.updatePoints.useMutation();
   const utils = api.useContext();
 
+  const [points, setPoints] = useState<Pairing[]>();
+
   useEffect(() => {
+    if (points) return;
+    if (sunlights && sunlights[0]) {
+      const isohels = calculateIsohels({ isohels: sunlights[0] });
+      setPoints(isohels);
+    }
     const refetchAndUpdate = async () => {
       const res = await fetch(`/api/isohel`, {
         method: "GET",
@@ -76,7 +84,7 @@ const HomePage: NextPage = () => {
       </Head>
       <Layout>
         <div className="flex h-[800px] w-full font-wix">
-          <Map />
+          {points && <Map points={points} />}
         </div>
       </Layout>
     </>

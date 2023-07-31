@@ -1,5 +1,9 @@
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { z } from "zod";
+import { inferProcedureOutput } from "@trpc/server";
+
+type IsohelRouter = typeof isohelRouter;
+export type GetAllDataOutput = inferProcedureOutput<IsohelRouter["getAllData"]>;
 
 export const isohelRouter = createTRPCRouter({
   getAllData: publicProcedure.query(async ({ ctx }) => {
