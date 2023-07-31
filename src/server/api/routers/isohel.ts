@@ -10,9 +10,24 @@ export const isohelRouter = createTRPCRouter({
     .input(
       z.object({
         newPoints: z.object({
-            lastUpdated: z.number(),
-            
-
+          lastUpdated: z.number(),
+          melbourne: z.number(),
+          london: z.number(),
+          brisbane: z.number(),
+          copenhagen: z.number(),
+          tokyo: z.number(),
+          toronto: z.number(),
+          auckland: z.number(),
+          vancouver: z.number(),
+          madrid: z.number(),
+          kyoto: z.number(),
+          osaka: z.number(),
+          cairo: z.number(),
+          istanbul: z.number(),
+          seoul: z.number(),
+          moscow: z.number(),
+          jakarta: z.number(),
+          shanghai: z.number(),
         }),
       })
     )
@@ -23,7 +38,24 @@ export const isohelRouter = createTRPCRouter({
           Id: 1,
         },
         data: {
-            lastUpdated: 
+          lastUpdated: input.newPoints.lastUpdated,
+          melbourne: input.newPoints.melbourne,
+          london: input.newPoints.london,
+          brisbane: input.newPoints.brisbane,
+          copenhagen: input.newPoints.copenhagen,
+          tokyo: input.newPoints.tokyo,
+          toronto: input.newPoints.toronto,
+          auckland: input.newPoints.auckland,
+          vancouver: input.newPoints.vancouver,
+          madrid: input.newPoints.madrid,
+          kyoto: input.newPoints.kyoto,
+          osaka: input.newPoints.osaka,
+          cairo: input.newPoints.cairo,
+          istanbul: input.newPoints.istanbul,
+          seoul: input.newPoints.seoul,
+          moscow: input.newPoints.moscow,
+          jakarta: input.newPoints.jakarta,
+          shanghai: input.newPoints.shanghai,
         },
       });
       console.log("after update");

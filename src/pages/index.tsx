@@ -1,36 +1,50 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { Layout } from "~/components/Layout";
 import { Map } from "~/components/Map";
 import { api } from "~/utils/api";
-import { SunEntryDynamic } from "./api/isohel";
 
 const dayMs = 86400000;
 const currentTime = new Date().getTime();
 
 const HomePage: NextPage = () => {
-  const [data, setData] = useState<any>();
-  console.log(data);
-
   const { data: sunlights } = api.isohel.getAllData.useQuery(undefined, {
     refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 
   const updateMutation = api.isohel.updatePoints.useMutation();
+  const utils = api.useContext();
 
   useEffect(() => {
-    if (data) return;
     const refetchAndUpdate = async () => {
       const res = await fetch(`/api/isohel`, {
         method: "GET",
       });
-      const newItems: SunEntryDynamic[] = await res.json();
+      const { sunlights } = await res.json();
       await toast.promise(
         updateMutation.mutateAsync({
           newPoints: {
-            lastUpdated: newItems.lastUpdated,
+            lastUpdated: new Date().getTime(),
+            melbourne: sunlights[0].Melbourne,
+            london: sunlights[1].London,
+            brisbane: sunlights[2].Brisbane,
+            copenhagen: sunlights[3].Copenhagen,
+            tokyo: sunlights[4].Tokyo,
+            toronto: sunlights[5].Toronto,
+            auckland: sunlights[6].Auckland,
+            vancouver: sunlights[7].Vancouver,
+            madrid: sunlights[8].Madrid,
+            kyoto: sunlights[9].Kyoto,
+            osaka: sunlights[10].Osaka,
+            cairo: sunlights[11].Cairo,
+            istanbul: sunlights[12].Istanbul,
+            seoul: sunlights[13].Seoul,
+            moscow: sunlights[14].Moscow,
+            jakarta: sunlights[15].Jakarta,
+            shanghai: sunlights[16].Shanghai,
           },
         }),
         {
@@ -39,21 +53,16 @@ const HomePage: NextPage = () => {
           error: "There was an issue fetching new data for the map.",
         }
       );
-      // await invalidate
-
-      setData(newItems);
+      await utils.isohel.getAllData.invalidate();
     };
-
-    console.log(sunlights);
-    refetchAndUpdate();
-    // if (sunlights && sunlights.lastUpdated) {
-    //   if (currentTime - sunlights.lastUpdated > dayMs) {
-    //     refetchAndUpdate();
-    //   }
-    // }
+    if (sunlights && sunlights[0]?.lastUpdated) {
+      const differenceInTime = currentTime - Number(sunlights[0].lastUpdated);
+      // if it has been longer than a day since last fetch
+      if (differenceInTime > dayMs) {
+        refetchAndUpdate();
+      }
+    }
   });
-
-  // fetch data and store it in the db,
 
   return (
     <>

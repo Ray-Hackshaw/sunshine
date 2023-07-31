@@ -71,7 +71,6 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       mos,
       jak,
       shan,
-      los,
     ] = await Promise.all([
       fetch(
         "https://api.openweathermap.org/data/2.5/weather?q=Melbourne&appid=20c8317a75161fafee1718a9ffd5f7b2&units=metric"
@@ -124,9 +123,6 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       fetch(
         "https://api.openweathermap.org/data/2.5/weather?q=Shanghai&appid=20c8317a75161fafee1718a9ffd5f7b2&units=metric"
       ),
-      fetch(
-        "https://api.openweathermap.org/data/2.5/weather?q=Los%20Angeles&appid=20c8317a75161fafee1718a9ffd5f7b2&units=metric"
-      ),
     ]);
 
     const cities: City[] = await Promise.all([
@@ -147,7 +143,6 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       mos.json(),
       jak.json(),
       shan.json(),
-      los.json(),
     ]);
 
     const sunlights: SunEntryDynamic[] = [];
