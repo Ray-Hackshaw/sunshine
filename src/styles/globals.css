@@ -13,3 +13,20 @@
 .mapboxgl-ctrl-attrib-inner {
   display: none !important;
 }
+
+.mapboxgl-popup {
+  max-width: 400px;
+  font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.mapboxgl-ctrl-icon {
+  display: none !important;
+}
+
+.mapboxgl-ctrl-attrib-button {
+  display: none !important;
+}
+
+.mapboxgl-ctrl.mapboxgl-ctrl-attrib.mapboxgl-compact {
+  display: none !important;
+}

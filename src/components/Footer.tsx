@@ -3,15 +3,15 @@ import Link from "next/link";
 const socialList = [
   {
     icon: "github",
-    href: "github",
+    href: "https://github.com/Ray-Hackshaw",
   },
   {
     icon: "linkedin",
-    href: "linkedin",
+    href: "https://www.linkedin.com/in/rayhackshaw/",
   },
   {
-    icon: "instagram",
-    href: "instagram",
+    icon: "contact",
+    href: "mailto:ray@rayhackshaw.com",
   },
 ];
 
@@ -35,7 +35,7 @@ const SocialLinks = () => {
 export const Footer = () => {
   return (
     <>
-      <footer className="absolute bottom-0 w-full bg-black bg-opacity-20 px-20 py-4 font-wix text-cloud backdrop-blur">
+      <footer className="absolute bottom-0 w-full bg-black bg-opacity-20 px-6 py-4 font-wix text-cloud backdrop-blur md:px-20">
         <div className="flex w-full justify-end">
           <SocialLinks />
         </div>

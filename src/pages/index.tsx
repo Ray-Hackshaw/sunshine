@@ -16,9 +16,13 @@ const HomePage: NextPage = () => {
     refetchOnMount: false,
   });
 
-  const updateMutation = api.isohel.updatePoints.useMutation();
+  const updateMutation = api.isohel.updatePoints.useMutation({
+    onSuccess: async () => {
+      await utils.isohel.getAllData.invalidate();
+      await utils.isohel.getAllData.refetch();
+    },
+  });
   const utils = api.useContext();
-
   const [points, setPoints] = useState<Pairing[]>();
 
   useEffect(() => {
@@ -61,7 +65,6 @@ const HomePage: NextPage = () => {
           error: "There was an issue fetching new data for the map.",
         }
       );
-      await utils.isohel.getAllData.invalidate();
     };
     if (sunlights && sunlights[0]?.lastUpdated) {
       const differenceInTime = currentTime - Number(sunlights[0].lastUpdated);
