@@ -8,7 +8,7 @@ import { Toaster } from "react-hot-toast";
 const Wix = localFont({
   src: [
     {
-      path: "../../public/fonts/WixMadeforText-Medium.ttf",
+      path: "./fonts/WixMadeforText-Medium.ttf",
       weight: "400",
       style: "normal",
     },

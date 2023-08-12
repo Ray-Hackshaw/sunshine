@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import { type NextPage } from "next";
 import Head from "next/head";
 import { Layout } from "~/components/Layout";
 
@@ -15,7 +15,7 @@ const HomePage: NextPage = () => (
           <p>Thank you for visiting.</p>
           <p>
             Around 3 years ago at the time of writing this, a musician EDEN
-            released 'isohel'.
+            released &apos;isohel&apos;.
           </p>
           <p>
             It addresses the ability to remain connected to those we have left
@@ -24,7 +24,7 @@ const HomePage: NextPage = () => (
           <p>
             Two places which share the same amount of sunlight in a day are
             joined together by what is called an{" "}
-            <span className="text-sun">"isohel"</span>.
+            <span className="text-sun">&quot;isohel&quot;</span>.
           </p>
           <p>
             Every 24 hours, this website collects data from OpenWeatherMapAPI

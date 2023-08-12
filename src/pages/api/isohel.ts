@@ -1,11 +1,16 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { type NextApiRequest, type NextApiResponse } from "next";
 
 interface City {
   coord: {
     lon: number;
     lat: number;
   };
-  weather: any;
+  weather: {
+    id: number;
+    main: string;
+    description: string;
+    icon: string;
+  };
   base: string;
   main: {
     temp: number;
@@ -37,7 +42,7 @@ interface City {
   cod: number;
 }
 
-export type SunEntryDynamic = { [key: string]: number };
+export type SunEntryDynamic = Record<string, number>;
 
 const calculateSunlight = ({
   sunrise,
@@ -125,7 +130,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       ),
     ]);
 
-    const cities: City[] = await Promise.all([
+    const cities: City[] = (await Promise.all([
       mel.json(),
       lon.json(),
       bris.json(),
@@ -143,7 +148,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
       mos.json(),
       jak.json(),
       shan.json(),
-    ]);
+    ])) as City[];
 
     const sunlights: SunEntryDynamic[] = [];
 
@@ -152,9 +157,9 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
         sunrise: city.sys.sunrise,
         sunset: city.sys.sunset,
       });
-
+      const name = city.name.toLowerCase();
       sunlights.push({
-        [city.name]: sunlight,
+        [name]: sunlight,
       });
     });
 

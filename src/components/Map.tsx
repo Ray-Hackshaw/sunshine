@@ -1,7 +1,7 @@
 import mapboxgl from "mapbox-gl";
 import { useEffect, useState } from "react";
 import { env } from "~/env.mjs";
-import { Pairing, calculateMidpoint } from "~/utils/calculateIsohels";
+import { type Pairing } from "~/utils/calculateIsohels";
 
 export enum Latitude {
   auckland = 174.76318,
@@ -47,10 +47,10 @@ export const Map = ({ points }: { points: Pairing[] }) => {
   useEffect(() => {
     if (map) return; // initialize map only once
 
-    const popup = new mapboxgl.Popup({
-      closeButton: false,
-      closeOnClick: false,
-    });
+    // const popup = new mapboxgl.Popup({
+    //   closeButton: false,
+    //   closeOnClick: false,
+    // });
 
     const newMap = new mapboxgl.Map({
       container: "map",
@@ -62,7 +62,7 @@ export const Map = ({ points }: { points: Pairing[] }) => {
       dragRotate: false,
     });
 
-    const featureData = points.map((isohel, i) => {
+    const featureData = points.map((isohel) => {
       const firstLat = Latitude[isohel.firstCity as keyof typeof Latitude];
       const firstLong = Longitude[isohel.firstCity as keyof typeof Longitude];
 
@@ -87,7 +87,7 @@ export const Map = ({ points }: { points: Pairing[] }) => {
       features: featureData,
     };
 
-    newMap.on("load", (e) => {
+    newMap.on("load", () => {
       newMap.addSource(`places`, {
         type: "geojson",
         data: dataSet as GeoJSON.FeatureCollection,
@@ -102,7 +102,7 @@ export const Map = ({ points }: { points: Pairing[] }) => {
         },
         paint: {
           "line-color": "#FCA311",
-          "line-width": 2,
+          "line-width": 3,
         },
       });
 

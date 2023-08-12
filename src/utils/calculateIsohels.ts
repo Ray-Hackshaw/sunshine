@@ -1,5 +1,4 @@
-import { Latitude, Longitude } from "~/components/Map";
-import { GetAllDataOutput } from "~/server/api/routers/isohel";
+import { type GetAllDataOutput } from "~/server/api/routers/isohel";
 
 export interface Pairing {
   firstCity: string;
