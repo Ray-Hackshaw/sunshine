@@ -7,6 +7,7 @@ import { Map } from "~/components/Map";
 import { api } from "~/utils/api";
 import { type Pairing, calculateIsohels } from "~/utils/calculateIsohels";
 import { type SunEntryDynamic } from "./api/isohel";
+import { Loading } from "~/components/Loading";
 
 export interface WeatherData {
   weather: {
@@ -44,10 +45,13 @@ const dayMs = 86400000;
 const currentTime = new Date().getTime();
 
 const HomePage: NextPage = () => {
-  const { data: sunlights } = api.isohel.getAllData.useQuery(undefined, {
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-  });
+  const { data: sunlights, isLoading } = api.isohel.getAllData.useQuery(
+    undefined,
+    {
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+    }
+  );
 
   const updateMutation = api.isohel.updatePoints.useMutation({
     onSuccess: async () => {
@@ -104,11 +108,21 @@ const HomePage: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout>
-        <div className="flex h-[800px] w-full font-wix">
-          {points && <Map points={points} />}
+      {!points && (
+        <div className="flex h-screen w-full items-center justify-center">
+          <div className="flex flex-col items-center gap-3">
+            <p>Loading...</p>
+            <Loading />
+          </div>
         </div>
-      </Layout>
+      )}
+      {points && !isLoading && (
+        <Layout>
+          <div className="flex h-[800px] w-full font-wix">
+            <Map points={points} />
+          </div>
+        </Layout>
+      )}
     </>
   );
 };

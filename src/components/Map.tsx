@@ -131,7 +131,7 @@ export const Map = ({ points }: { points: Pairing[] }) => {
     });
 
     setMap(newMap);
-  });
+  }, [map, points]);
 
   return (
     <div className="relative flex h-screen w-full">
