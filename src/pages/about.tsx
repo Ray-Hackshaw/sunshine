@@ -2,7 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { Layout } from "~/components/Layout";
 
-const HomePage: NextPage = () => (
+const AboutPage: NextPage = () => (
   <>
     <Head>
       <title>About</title>
@@ -28,7 +28,7 @@ const HomePage: NextPage = () => (
           </p>
           <p>
             Every 24 hours, this website collects data from OpenWeatherMapAPI
-            across 20 different cities around the world. It will calculate the
+            across 17 different cities around the world. It will calculate the
             sunlight duration for each city and connect any that share an
             isohel.
           </p>
@@ -52,4 +52,4 @@ const HomePage: NextPage = () => (
   </>
 );
 
-export default HomePage;
+export default AboutPage;
