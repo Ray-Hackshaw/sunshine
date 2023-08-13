@@ -35,7 +35,7 @@ const SocialLinks = () => {
 export const Footer = () => {
   return (
     <>
-      <footer className="absolute bottom-0 w-full bg-black bg-opacity-20 px-2 py-4 font-wix text-cloud backdrop-blur md:px-20">
+      <footer className="fixed bottom-0 w-full bg-black bg-opacity-20 px-2 font-wix text-cloud backdrop-blur md:px-20">
         <div className="w-full justify-between md:flex">
           <p className="text-sm font-medium md:text-base">
             built with{" "}

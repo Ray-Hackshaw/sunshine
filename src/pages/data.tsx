@@ -15,7 +15,7 @@ const DataPage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <div className="flex h-screen w-full items-center justify-center bg-blue">
+        <div className="flex min-h-screen w-full items-center justify-center bg-blue py-20">
           <div className="z-20 mx-auto w-full max-w-4xl space-y-4 px-4 font-wix text-cloud">
             <p className="text-center text-2xl font-medium">
               Today&apos;s Sunlight Data

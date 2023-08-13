@@ -10,7 +10,7 @@ const AboutPage: NextPage = () => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Layout>
-      <div className="flex h-screen w-full items-center justify-center bg-blue">
+      <div className="flex min-h-screen w-full items-center justify-center bg-blue py-20">
         <div className="z-20 mx-auto w-full max-w-2xl space-y-4 px-4 font-wix text-cloud">
           <p>Thank you for visiting.</p>
           <p>
