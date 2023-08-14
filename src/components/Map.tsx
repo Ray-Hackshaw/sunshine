@@ -20,6 +20,7 @@ export enum Latitude {
   kyoto = 135.755607,
   madrid = -3.703583,
   vancouver = -123.11395559921081,
+  london = -0.127273,
 }
 
 export enum Longitude {
@@ -39,6 +40,7 @@ export enum Longitude {
   kyoto = 35.021041,
   madrid = 40.416705,
   vancouver = 49.260849996098955,
+  london = 51.503027
 }
 
 export const Map = ({ points }: { points: Pairing[] }) => {
