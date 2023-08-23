@@ -11,7 +11,6 @@ export const calculateIsohels = ({
   isohels: GetAllDataOutput[0];
 }) => {
   const pairings: Pairing[] = [];
-
   const filteredItems = Object.entries(isohels).filter(
     ([key, _]) => key !== "Id" && key !== "lastUpdated"
   );
@@ -22,8 +21,8 @@ export const calculateIsohels = ({
       }
     });
   });
-
-  return pairings;
+  if (pairings.length === 0) return pairings;
+  return pairings.slice(0, pairings.length / 2);
 };
 
 export const calculateMidpoint = ({
