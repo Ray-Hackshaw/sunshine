@@ -8,6 +8,7 @@ import { api } from "~/utils/api";
 import { type Pairing, calculateIsohels } from "~/utils/calculateIsohels";
 import { type SunEntryDynamic } from "./api/isohel";
 import { Loading } from "~/components/Loading";
+import { useRouter } from "next/router";
 
 export interface WeatherData {
   weather: {
@@ -45,6 +46,7 @@ const dayMs = 86400000;
 const currentTime = new Date().getTime();
 
 const HomePage: NextPage = () => {
+  const router = useRouter();
   const { data: sunlights, isLoading } = api.isohel.getAllData.useQuery(
     undefined,
     {
@@ -57,6 +59,7 @@ const HomePage: NextPage = () => {
     onSuccess: async () => {
       await utils.isohel.getAllData.invalidate();
       await utils.isohel.getAllData.refetch();
+      router.reload();
     },
   });
   const utils = api.useContext();
@@ -91,7 +94,7 @@ const HomePage: NextPage = () => {
     };
     if (sunlights && sunlights[0]?.lastUpdated) {
       const differenceInTime = currentTime - Number(sunlights[0].lastUpdated);
-      // if it has been longer than a day since last fetch
+      //   if it has been longer than a day since last fetch
       if (differenceInTime > dayMs) {
         void refetchAndUpdate();
       }

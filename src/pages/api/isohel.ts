@@ -52,7 +52,7 @@ const calculateSunlight = ({
   sunset: number;
 }) => {
   const value = sunset - sunrise;
-  const rounded = Math.ceil(value / 1000) * 1000;
+  const rounded = Math.ceil(value / 100) * 100;
   return rounded;
 };
 
