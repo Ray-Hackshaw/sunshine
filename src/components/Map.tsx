@@ -40,7 +40,7 @@ export enum Longitude {
   kyoto = 35.021041,
   madrid = 40.416705,
   vancouver = 49.260849996098955,
-  london = 51.503027
+  london = 51.503027,
 }
 
 export const Map = ({ points }: { points: Pairing[] }) => {
@@ -63,7 +63,7 @@ export const Map = ({ points }: { points: Pairing[] }) => {
       minZoom: 1.75,
       dragRotate: false,
     });
-
+    console.log(points);
     const featureData = points.map((isohel) => {
       const firstLat = Latitude[isohel.firstCity as keyof typeof Latitude];
       const firstLong = Longitude[isohel.firstCity as keyof typeof Longitude];

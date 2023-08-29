@@ -22,7 +22,19 @@ export const calculateIsohels = ({
     });
   });
   if (pairings.length === 0) return pairings;
-  return pairings.slice(0, pairings.length / 2);
+
+  const uniquePairs = new Set<string>();
+
+  const filteredArray = pairings.filter((obj) => {
+    const pairString = [obj.firstCity, obj.secondCity].sort().join("|");
+    if (!uniquePairs.has(pairString)) {
+      uniquePairs.add(pairString);
+      return true;
+    }
+    return false;
+  });
+
+  return filteredArray;
 };
 
 export const calculateMidpoint = ({
