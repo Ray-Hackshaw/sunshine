@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  @apply font-wix;
+}
+
+video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 .font-bold {
   @apply font-wix font-black;
 }
@@ -29,4 +42,7 @@
 
 .mapboxgl-ctrl.mapboxgl-ctrl-attrib.mapboxgl-compact {
   display: none !important;
+}
+
+.max-w-7xl {
 }

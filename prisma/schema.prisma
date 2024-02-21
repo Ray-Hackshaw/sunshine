@@ -9,7 +9,7 @@ datasource db {
 }
 
 model sunlight {
-  lastUpdated BigInt @unique(map: "lastUpdated")
+  id          Int    @id @default(autoincrement())
   auckland    Int
   brisbane    Int
   melbourne   Int
@@ -26,6 +26,5 @@ model sunlight {
   kyoto       Int
   madrid      Int
   vancouver   Int
-  Id          Int    @id @default(autoincrement())
   london      Int
 }

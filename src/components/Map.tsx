@@ -1,58 +1,17 @@
 import mapboxgl from "mapbox-gl";
 import { useEffect, useState } from "react";
 import { env } from "~/env.mjs";
-import { type Pairing } from "~/utils/calculateIsohels";
-
-export enum Latitude {
-  auckland = 174.76318,
-  brisbane = 153.0228,
-  melbourne = 144.963161,
-  tokyo = 139.766991,
-  copenhagen = 12.5697339,
-  toronto = -73.891045,
-  shanghai = 121.469098,
-  jakarta = 106.827183,
-  moscow = 37.6174943,
-  seoul = 126.97810936771378,
-  istanbul = 28.966542168875037,
-  cairo = 31.235726,
-  osaka = 135.501454,
-  kyoto = 135.755607,
-  madrid = -3.703583,
-  vancouver = -123.11395559921081,
-  london = -0.127273,
-}
-
-export enum Longitude {
-  auckland = -36.852095,
-  brisbane = -27.4697,
-  melbourne = -37.814218,
-  tokyo = 35.680818,
-  copenhagen = 55.6753132,
-  toronto = 40.646722,
-  shanghai = 31.232234,
-  jakarta = -6.1753942,
-  moscow = 55.7504461,
-  seoul = 37.566316529399074,
-  istanbul = 41.00879853442103,
-  cairo = 30.044388,
-  osaka = 34.693757,
-  kyoto = 35.021041,
-  madrid = 40.416705,
-  vancouver = 49.260849996098955,
-  london = 51.503027,
-}
+import { api } from "~/utils/api";
+import type { Pairing } from "~/utils/interfaces";
+import { Latitude, Longitude } from "~/utils/cities";
 
 export const Map = ({ points }: { points: Pairing[] }) => {
   const [map, setMap] = useState<mapboxgl.Map>();
 
+  const { data: sunlights } = api.isohel.getAllData.useQuery();
+
   useEffect(() => {
     if (map) return; // initialize map only once
-
-    // const popup = new mapboxgl.Popup({
-    //   closeButton: false,
-    //   closeOnClick: false,
-    // });
 
     const newMap = new mapboxgl.Map({
       container: "map",
@@ -63,7 +22,7 @@ export const Map = ({ points }: { points: Pairing[] }) => {
       minZoom: 1.75,
       dragRotate: false,
     });
-    console.log(points);
+
     const featureData = points.map((isohel) => {
       const firstLat = Latitude[isohel.firstCity as keyof typeof Latitude];
       const firstLong = Longitude[isohel.firstCity as keyof typeof Longitude];
@@ -84,6 +43,28 @@ export const Map = ({ points }: { points: Pairing[] }) => {
       };
     });
 
+    const allPoints = Object.entries(sunlights!)
+      .filter((x) => x[0] !== "id")
+      .map(([key, value]) => {
+        const lat = Latitude[key as keyof typeof Latitude] as number;
+        const long = Longitude[key as keyof typeof Longitude] as number;
+        return {
+          type: "Feature",
+          properties: {
+            description: `${value}`,
+          },
+          geometry: {
+            type: "Point",
+            coordinates: [lat, long],
+          },
+        };
+      });
+
+    const pointSet = {
+      type: "FeatureCollection",
+      features: allPoints,
+    };
+
     const dataSet = {
       type: "FeatureCollection",
       features: featureData,
@@ -93,6 +74,10 @@ export const Map = ({ points }: { points: Pairing[] }) => {
       newMap.addSource(`places`, {
         type: "geojson",
         data: dataSet as GeoJSON.FeatureCollection,
+      });
+      newMap.addSource("points", {
+        type: "geojson",
+        data: pointSet as GeoJSON.FeatureCollection,
       });
       newMap.addLayer({
         id: `places`,
@@ -108,36 +93,34 @@ export const Map = ({ points }: { points: Pairing[] }) => {
         },
       });
 
-      //   newMap.on("mouseenter", `places`, (e) => {
-      //     newMap.getCanvas().style.cursor = "pointer";
-      //     console.log("ENTERED");
-      //     if (!e.features || !e.features[0]) return;
-
-      //     const coordinates = (e.features[0].geometry as GeoJSON.LineString)
-      //       .coordinates;
-      //     const first = coordinates[0] as [number, number];
-      //     const second = coordinates[1] as [number, number];
-
-      //     const midpoint = calculateMidpoint({ first: first, second: second });
-      //     if (midpoint !== 0) {
-      //       popup
-      //         .setLngLat([midpoint.long / 1.75, midpoint.lat / 1.75])
-      //         .setHTML("Hello")
-      //         .addTo(newMap);
-      //     }
-      //   });
-      //   newMap.on("mouseleave", `places`, () => {
-      //     newMap.getCanvas().style.cursor = "";
-      //     popup.remove();
-      //   });
+      newMap.addLayer({
+        id: "points",
+        type: "symbol",
+        source: "points",
+        layout: {
+          "text-field": ["get", "description"],
+          "text-variable-anchor": ["top", "bottom", "left", "right"],
+          "text-radial-offset": 0.5,
+          "text-justify": "auto",
+          "icon-image": ["get", "icon"],
+          "text-size": 15,
+          "text-font": ["Arial Unicode MS Regular"],
+        },
+        paint: {
+          "text-color": "#FCA311",
+          "text-halo-color": "#838383",
+          "text-halo-width": 1,
+        },
+      });
     });
 
     setMap(newMap);
-  }, [map, points]);
+  }, [map, points, sunlights]);
 
   return (
-    <div className="relative flex h-screen w-full">
-      <div id="map" className="w-full" />
-    </div>
+    <div
+      id="map"
+      className="h-[80vh] w-full overflow-hidden rounded-md border-2"
+    />
   );
 };

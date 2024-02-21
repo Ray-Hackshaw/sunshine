@@ -1,18 +1,14 @@
-import { type GetAllDataOutput } from "~/server/api/routers/isohel";
-
-export interface Pairing {
-  firstCity: string;
-  secondCity: string;
-}
+import type { GetAllDataOutput } from "~/server/api/routers/isohel";
+import type { Pairing } from "./interfaces";
 
 export const calculateIsohels = ({
   isohels,
 }: {
-  isohels: GetAllDataOutput[0];
+  isohels: GetAllDataOutput;
 }) => {
   const pairings: Pairing[] = [];
   const filteredItems = Object.entries(isohels).filter(
-    ([key, _]) => key !== "Id" && key !== "lastUpdated"
+    ([key, _]) => key !== "id"
   );
   filteredItems.map(([firstKey, firstValue]) => {
     filteredItems.map(([secondKey, secondValue]) => {

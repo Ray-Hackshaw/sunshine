@@ -1,5 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import { Layout } from "~/components/Layout";
 
 const AboutPage: NextPage = () => (
@@ -10,17 +11,9 @@ const AboutPage: NextPage = () => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Layout>
-      <div className="flex min-h-screen w-full items-center justify-center bg-blue py-20">
+      <div className="flex min-h-screen w-full items-center justify-center bg-dark py-20">
         <div className="z-20 mx-auto w-full max-w-2xl space-y-4 px-4 font-wix text-cloud">
           <p>Thank you for visiting.</p>
-          <p>
-            Around 3 years ago at the time of writing this, a musician EDEN
-            released &apos;isohel&apos;.
-          </p>
-          <p>
-            It addresses the ability to remain connected to those we have left
-            behind through the use of sunlight.
-          </p>
           <p>
             Two places which share the same amount of sunlight in a day are
             joined together by what is called an{" "}
@@ -34,7 +27,8 @@ const AboutPage: NextPage = () => (
           </p>
           <p />
           <p>
-            Stream the song on Spotify{" "}
+            Stream the song <span className="text-sun">&quot;isohel&quot;</span>{" "}
+            by EDEN on Spotify{" "}
             <span
               className="cursor-pointer text-sun underline"
               onClick={() =>
@@ -46,6 +40,9 @@ const AboutPage: NextPage = () => (
               here.
             </span>
           </p>
+          <Link className="mt-20 underline" href="/">
+            ← back
+          </Link>
         </div>
       </div>
     </Layout>

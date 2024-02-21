@@ -11,8 +11,8 @@ const CalculationsPage: NextPage = () => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Layout>
-      <div className="flex min-h-screen w-full items-center justify-center bg-blue py-20">
-        <div className="z-20 mx-auto w-full max-w-2xl space-y-4 px-4 font-wix text-cloud">
+      <div className="flex min-h-screen w-full items-center justify-center bg-dark py-20">
+        <div className="mx-auto w-full max-w-2xl space-y-4 px-4 font-wix text-cloud">
           <p className="text-2xl font-medium">How the calculations work</p>
           <p>
             <span>
@@ -37,22 +37,29 @@ const CalculationsPage: NextPage = () => (
             Each city then gets a sunlight duration assigned to it via{" "}
             <code className="text-sun">sunset - sunrise</code>.
           </p>
-          <p className="text-2xl font-medium">Approximations</p>
+          <p className="mx-auto w-[60%] border text-lg font-medium" />
           <p>
             Due to the nature of our method of calculation, &apos;true&apos;
             isohels are actually close to/almost impossible to find without
             approximating our results.
           </p>
-          <p>
-            e.g. if Madrid has a sunlight duration of 52,756, and if Istanbul
-            has a sunlight duration of 52,856 - they would not share an isohel
-            if we leave them like this.
+          <p className="text-sun">
+            e.g.{" "}
+            <span className="italic text-cloud">
+              if Madrid has a sunlight duration of{" "}
+              <span className="text-sun">52,756</span>, and if Istanbul has a
+              sunlight duration of <span className="text-sun">52,856</span> -
+              they would not share an isohel if we leave them like this.
+            </span>
           </p>
           <p>
             Sunlight duration is rounded up as a measure to ensure this
             application isn&apos;t too accurate to the point where it is not
             showing any data at all.
           </p>
+          <Link className="underline" href="/">
+            ← back
+          </Link>
         </div>
       </div>
     </Layout>

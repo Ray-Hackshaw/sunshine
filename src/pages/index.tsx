@@ -1,49 +1,17 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
 import { Layout } from "~/components/Layout";
 import { Map } from "~/components/Map";
 import { api } from "~/utils/api";
-import { type Pairing, calculateIsohels } from "~/utils/calculateIsohels";
-import { type SunEntryDynamic } from "./api/isohel";
+import { calculateIsohels } from "~/utils/calculateIsohels";
+import type { Pairing } from "~/utils/interfaces";
 import { Loading } from "~/components/Loading";
 import { useRouter } from "next/router";
+import { BackgroundVideo } from "~/components/BgVideo";
+import Link from "next/link";
 
-export interface WeatherData {
-  weather: {
-    id: number;
-    main: string;
-    description: string;
-    icon: string;
-  };
-  main: {
-    temp: number;
-    feels_like: number;
-    temp_min: number;
-    temp_max: number;
-    pressure: number;
-    humidity: number;
-  };
-  wind: {
-    speed: number;
-    deg: number;
-  };
-  sys: {
-    country: string;
-    sunrise: number;
-    sunset: number;
-  };
-  name: string;
-}
-
-interface DataRes {
-  lastUpdated: number;
-  sunlights: SunEntryDynamic[];
-}
-
-const dayMs = 86400000;
-const currentTime = new Date().getTime();
+// bg video credit to Jonathan Ng (EDEN) and team
 
 const HomePage: NextPage = () => {
   const router = useRouter();
@@ -67,37 +35,9 @@ const HomePage: NextPage = () => {
 
   useEffect(() => {
     if (points) return;
-    if (sunlights && sunlights[0]) {
-      const isohels = calculateIsohels({ isohels: sunlights[0] });
+    if (sunlights) {
+      const isohels = calculateIsohels({ isohels: sunlights });
       setPoints(isohels);
-    }
-
-    const refetchAndUpdate = async () => {
-      const res = await fetch(`/api/isohel`, {
-        method: "GET",
-      });
-      const data = (await res.json()) as DataRes;
-      if (!data) return;
-      await toast.promise(
-        updateMutation.mutateAsync({
-          newPoints: {
-            sunlights: data.sunlights,
-            lastUpdated: new Date().getTime(),
-          },
-        }),
-        {
-          loading: "Updating map data...",
-          success: "New data has been fetched!",
-          error: "There was an issue fetching new data for the map.",
-        }
-      );
-    };
-    if (sunlights && sunlights[0]?.lastUpdated) {
-      const differenceInTime = currentTime - Number(sunlights[0].lastUpdated);
-      //   if it has been longer than a day since last fetch
-      if (differenceInTime > dayMs) {
-        void refetchAndUpdate();
-      }
     }
   }, [points, sunlights, updateMutation]);
 
@@ -112,17 +52,47 @@ const HomePage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {!points && (
-        <div className="flex h-screen w-full items-center justify-center">
+        <div className="flex min-h-screen w-full items-center justify-center bg-dark">
           <div className="flex flex-col items-center gap-3">
-            <p>Loading...</p>
+            <p className="font-wix text-white">Loading...</p>
             <Loading />
           </div>
         </div>
       )}
       {points && !isLoading && (
         <Layout>
-          <div className="flex h-[800px] w-full font-wix">
+          <BackgroundVideo />
+          <div className="mx-auto flex w-full max-w-[100vw] flex-col gap-8 px-4 py-6 font-wix md:min-h-screen md:px-8 md:py-8 xl:max-w-7xl">
             <Map points={points} />
+            <div className="z-[99] mx-auto flex w-full max-w-fit justify-center gap-4 overflow-hidden rounded-md border-2 bg-[#131313] p-4 text-white">
+              <Link
+                href="https://github.com/Ray-Hackshaw"
+                className="underline"
+                target="_blank"
+              >
+                github
+              </Link>
+              <Link
+                href="https://linkedin.com/in/Ray-Hackshaw"
+                className="underline"
+                target="_blank"
+              >
+                linkedin
+              </Link>
+              <Link
+                href="mailto:ray@rayhackshaw.com"
+                className="underline"
+                target="_blank"
+              >
+                email
+              </Link>
+              <Link href="/about" className="underline">
+                inspiration
+              </Link>
+              <Link href="/calculations" className="underline">
+                how it works
+              </Link>
+            </div>
           </div>
         </Layout>
       )}

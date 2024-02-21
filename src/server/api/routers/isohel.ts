@@ -2,19 +2,24 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { z } from "zod";
 import { type inferProcedureOutput } from "@trpc/server";
 
-type IsohelRouter = typeof isohelRouter;
-export type GetAllDataOutput = inferProcedureOutput<IsohelRouter["getAllData"]>;
+type RouterType = typeof isohelRouter;
+
+export type GetAllDataOutput = NonNullable<
+  inferProcedureOutput<RouterType["getAllData"]>
+>;
 
 export const isohelRouter = createTRPCRouter({
   getAllData: publicProcedure.query(async ({ ctx }) => {
-    const data = await ctx.prisma.sunlight.findMany();
-    return data;
+    return await ctx.prisma.sunlight.findUnique({
+      where: {
+        id: 1,
+      },
+    });
   }),
   updatePoints: publicProcedure
     .input(
       z.object({
         newPoints: z.object({
-          lastUpdated: z.number(),
           sunlights: z.array(z.record(z.string().min(1), z.number())),
         }),
       })
@@ -29,10 +34,9 @@ export const isohelRouter = createTRPCRouter({
 
       await ctx.prisma.sunlight.update({
         where: {
-          Id: 1,
+          id: 1,
         },
         data: {
-          lastUpdated: input.newPoints.lastUpdated,
           ...sunlights,
         },
       });

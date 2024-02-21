@@ -1,13 +1,9 @@
-import { type PropsWithChildren } from "react";
-import { Header } from "./Header";
-import { Footer } from "./Footer";
+import type { PropsWithChildren } from "react";
 
 export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <>
-      <Header />
-      <main className="flex w-full">{children}</main>
-      <Footer />
+      <main className="flex min-h-screen w-full">{children}</main>
     </>
   );
 };
