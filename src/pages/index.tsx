@@ -7,14 +7,12 @@ import { api } from "~/utils/api";
 import { calculateIsohels } from "~/utils/calculateIsohels";
 import type { Pairing } from "~/utils/interfaces";
 import { Loading } from "~/components/Loading";
-import { useRouter } from "next/router";
 import { BackgroundVideo } from "~/components/BgVideo";
 import Link from "next/link";
 
 // bg video credit to Jonathan Ng (EDEN) and team
 
 const HomePage: NextPage = () => {
-  const router = useRouter();
   const { data: sunlights, isLoading } = api.isohel.getAllData.useQuery(
     undefined,
     {
@@ -23,14 +21,6 @@ const HomePage: NextPage = () => {
     }
   );
 
-  const updateMutation = api.isohel.updatePoints.useMutation({
-    onSuccess: async () => {
-      await utils.isohel.getAllData.invalidate();
-      await utils.isohel.getAllData.refetch();
-      router.reload();
-    },
-  });
-  const utils = api.useContext();
   const [points, setPoints] = useState<Pairing[]>();
 
   useEffect(() => {
@@ -39,7 +29,7 @@ const HomePage: NextPage = () => {
       const isohels = calculateIsohels({ isohels: sunlights });
       setPoints(isohels);
     }
-  }, [points, sunlights, updateMutation]);
+  }, [points, sunlights]);
 
   return (
     <>

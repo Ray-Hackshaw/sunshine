@@ -1,11 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { calculateSunlight } from "~/server/utils/calculations";
+import { api } from "~/utils/api";
 import { locationNames } from "~/utils/cities";
 import type { City, CityWithUrl, SunEntryDynamic } from "~/utils/interfaces";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const cityResponses: CityWithUrl[] = [];
+    const { mutate: updateMutation } = api.isohel.updatePoints.useMutation();
 
     locationNames.forEach((city) => {
       cityResponses.push({
@@ -31,6 +33,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       sunlights.push({
         [name]: sunlight,
       });
+    });
+
+    updateMutation({
+      newPoints: { sunlights },
     });
 
     return res.status(200).json({
