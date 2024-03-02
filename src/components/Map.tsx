@@ -4,6 +4,7 @@ import { env } from "~/env.mjs";
 import { api } from "~/utils/api";
 import type { Pairing } from "~/utils/interfaces";
 import { Latitude, Longitude } from "~/utils/cities";
+import { capitalize } from "~/server/utils/textFormat";
 
 export const Map = ({ points }: { points: Pairing[] }) => {
   const [map, setMap] = useState<mapboxgl.Map>();
@@ -18,7 +19,7 @@ export const Map = ({ points }: { points: Pairing[] }) => {
       accessToken: env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN,
       style: "mapbox://styles/rhackshaw/clkgryts0002e01ohd79g0svm",
       center: [20, 15],
-      zoom: 1.75,
+      zoom: 1.85,
       minZoom: 1.75,
       dragRotate: false,
     });
@@ -51,7 +52,7 @@ export const Map = ({ points }: { points: Pairing[] }) => {
         return {
           type: "Feature",
           properties: {
-            description: `${value}`,
+            description: `${capitalize(key)} (${value})`,
           },
           geometry: {
             type: "Point",
@@ -64,14 +65,13 @@ export const Map = ({ points }: { points: Pairing[] }) => {
       type: "FeatureCollection",
       features: allPoints,
     };
-
     const dataSet = {
       type: "FeatureCollection",
       features: featureData,
     };
 
     newMap.on("load", () => {
-      newMap.addSource(`places`, {
+      newMap.addSource("places", {
         type: "geojson",
         data: dataSet as GeoJSON.FeatureCollection,
       });
@@ -79,6 +79,7 @@ export const Map = ({ points }: { points: Pairing[] }) => {
         type: "geojson",
         data: pointSet as GeoJSON.FeatureCollection,
       });
+
       newMap.addLayer({
         id: `places`,
         type: "line",
@@ -89,10 +90,10 @@ export const Map = ({ points }: { points: Pairing[] }) => {
         },
         paint: {
           "line-color": "#FCA311",
-          "line-width": 3,
+          "line-width": 7,
+          "line-blur": 2,
         },
       });
-
       newMap.addLayer({
         id: "points",
         type: "symbol",
@@ -100,16 +101,18 @@ export const Map = ({ points }: { points: Pairing[] }) => {
         layout: {
           "text-field": ["get", "description"],
           "text-variable-anchor": ["top", "bottom", "left", "right"],
-          "text-radial-offset": 0.5,
           "text-justify": "auto",
           "icon-image": ["get", "icon"],
           "text-size": 15,
           "text-font": ["Arial Unicode MS Regular"],
+          "text-allow-overlap": true,
+          "text-ignore-placement": true,
         },
         paint: {
-          "text-color": "#FCA311",
-          "text-halo-color": "#838383",
-          "text-halo-width": 1,
+          "text-color": "#fff",
+          "text-halo-color": "#000",
+          "text-halo-width": 2,
+          "text-halo-blur": 2,
         },
       });
     });
@@ -120,7 +123,7 @@ export const Map = ({ points }: { points: Pairing[] }) => {
   return (
     <div
       id="map"
-      className="h-[80vh] w-full overflow-hidden rounded-md border-2"
+      className="h-[80vh] w-full max-w-[1840px] overflow-hidden rounded-md border-2"
     />
   );
 };

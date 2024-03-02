@@ -1,18 +1,26 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { calculateSunlight } from "~/server/utils/calculations";
-import { api } from "~/utils/api";
+import { prisma } from "~/server/db";
+import {
+  calculateSunlight,
+  updateSunlightPoints,
+} from "~/server/utils/calculations";
 import { locationNames } from "~/utils/cities";
 import type { City, CityWithUrl, SunEntryDynamic } from "~/utils/interfaces";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const cityResponses: CityWithUrl[] = [];
-    const { mutate: updateMutation } = api.isohel.updatePoints.useMutation();
-
     locationNames.forEach((city) => {
+      const queryCity =
+        city === "LosAngeles"
+          ? "Los%20Angeles"
+          : city === "CapeTown"
+          ? "Cape%20Town"
+          : city;
+
       cityResponses.push({
         city,
-        url: `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=20c8317a75161fafee1718a9ffd5f7b2&units=metric`,
+        url: `https://api.openweathermap.org/data/2.5/weather?q=${queryCity}&appid=20c8317a75161fafee1718a9ffd5f7b2&units=metric`,
       });
     });
 
@@ -29,15 +37,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         sunrise: city.sys.sunrise,
         sunset: city.sys.sunset,
       });
-      const name = city.name.toLowerCase();
+      const name = city.name.replace(" ", "").toLowerCase();
       sunlights.push({
         [name]: sunlight,
       });
     });
 
-    updateMutation({
-      newPoints: { sunlights },
-    });
+    await updateSunlightPoints(sunlights, prisma);
 
     return res.status(200).json({
       sunlights: sunlights,

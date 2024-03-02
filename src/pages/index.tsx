@@ -7,10 +7,7 @@ import { api } from "~/utils/api";
 import { calculateIsohels } from "~/utils/calculateIsohels";
 import type { Pairing } from "~/utils/interfaces";
 import { Loading } from "~/components/Loading";
-import { BackgroundVideo } from "~/components/BgVideo";
-import Link from "next/link";
-
-// bg video credit to Jonathan Ng (EDEN) and team
+import { capitalize } from "~/server/utils/textFormat";
 
 const HomePage: NextPage = () => {
   const { data: sunlights, isLoading } = api.isohel.getAllData.useQuery(
@@ -30,6 +27,13 @@ const HomePage: NextPage = () => {
       setPoints(isohels);
     }
   }, [points, sunlights]);
+
+  const uniqueCities = [
+    ...new Set([
+      ...(points?.map((x) => capitalize(x.firstCity)) ?? []),
+      ...(points?.map((x) => capitalize(x.secondCity)) ?? []),
+    ]),
+  ].join(", ");
 
   return (
     <>
@@ -51,37 +55,28 @@ const HomePage: NextPage = () => {
       )}
       {points && !isLoading && (
         <Layout>
-          <BackgroundVideo />
-          <div className="mx-auto flex w-full max-w-[100vw] flex-col gap-8 px-4 py-6 font-wix md:min-h-screen md:px-8 md:py-8 xl:max-w-7xl">
+          <div className="mx-auto flex w-full flex-col gap-8 px-4 py-6 font-wix md:min-h-screen md:px-8 md:py-8">
             <Map points={points} />
-            <div className="z-[99] mx-auto flex w-full max-w-fit justify-center gap-4 overflow-hidden rounded-md border-2 bg-[#131313] p-4 text-white">
-              <Link
-                href="https://github.com/Ray-Hackshaw"
-                className="underline"
-                target="_blank"
-              >
-                github
-              </Link>
-              <Link
-                href="https://linkedin.com/in/Ray-Hackshaw"
-                className="underline"
-                target="_blank"
-              >
-                linkedin
-              </Link>
-              <Link
-                href="mailto:ray@rayhackshaw.com"
-                className="underline"
-                target="_blank"
-              >
-                email
-              </Link>
-              <Link href="/about" className="underline">
-                inspiration
-              </Link>
-              <Link href="/calculations" className="underline">
-                how it works
-              </Link>
+
+            <div className="w-full text-cloud">
+              <p>
+                Every 24 hours this website updates with the sunlight duration
+                of cities from around the world.
+              </p>
+              <p>
+                If the two cities have the same amount of sunlight that day,
+                they are connected by an{" "}
+                <span className="text-sun">isohel</span>, indicated by a line on
+                this map.
+              </p>
+              <p>
+                Today there are{" "}
+                <span className={points.length > 0 ? "text-sun" : "text-cloud"}>
+                  {points.length}
+                </span>{" "}
+                isohels.{" "}
+                <span className="text-slate-500">({uniqueCities})</span>
+              </p>
             </div>
           </div>
         </Layout>

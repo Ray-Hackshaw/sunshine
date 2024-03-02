@@ -27,4 +27,15 @@ model sunlight {
   madrid      Int
   vancouver   Int
   london      Int
+  losangeles Int
+  capetown Int
+  mexico Int
+  lima Int
+  santiago Int
+  marrakesh Int
+  prague Int
+  warsaw Int
+  budapest Int
+  milan Int
+  zurich Int
 }

@@ -1,20 +1,3 @@
-export const auckland = [174.76318, -36.852095];
-export const brisbane = [153.0228, -27.4697];
-export const melbourne = [144.963161, -37.814218];
-export const tokyo = [139.766991, 35.680818];
-export const copenhagen = [12.5697339, 55.6753132];
-export const toronto = [-73.891045, 40.646722];
-export const shanghai = [121.469098, 31.232234];
-export const jakarta = [106.827183, -6.1753942];
-export const moscow = [37.6174943, 55.7504461];
-export const seoul = [126.97810936771378, 37.566316529399074];
-export const istanbul = [28.966542168875037, 41.00879853442103];
-export const cairo = [31.235726, 30.044388];
-export const osaka = [135.501454, 34.693757];
-export const kyoto = [135.755607, 35.021041];
-export const madrid = [-3.703583, 40.416705];
-export const vancouver = [-123.11395559921081, 49.260849996098955];
-
 export const locationNames = [
   "Auckland",
   "Brisbane",
@@ -33,6 +16,17 @@ export const locationNames = [
   "Madrid",
   "Vancouver",
   "London",
+  "CapeTown",
+  "Mexico",
+  "LosAngeles",
+  "Lima",
+  "Santiago",
+  "Marrakesh",
+  "Prague",
+  "Warsaw",
+  "Budapest",
+  "Milan",
+  "Zurich",
 ];
 
 export enum Latitude {
@@ -53,6 +47,17 @@ export enum Latitude {
   madrid = -3.703583,
   vancouver = -123.11395559921081,
   london = -0.127273,
+  capetown = 18.417396,
+  mexico = 15.0646,
+  losAngeles = -118.243683,
+  lima = -77.0322896988963,
+  santiago = -70.6483,
+  marrakesh = -7.989161,
+  prague = 14.4378,
+  warsaw = 21.0122,
+  budapest = 19.0402,
+  milan = 9.19,
+  zurich = 8.5417,
 }
 
 export enum Longitude {
@@ -73,24 +78,15 @@ export enum Longitude {
   madrid = 40.416705,
   vancouver = 49.260849996098955,
   london = 51.503027,
+  capetown = -33.928992,
+  mexico = 120.7198,
+  losAngeles = 34.052426,
+  lima = -12.07643445,
+  santiago = -33.4489,
+  marrakesh = 31.625826,
+  prague = 50.0755,
+  warsaw = 52.2297,
+  budapest = 47.4979,
+  milan = 45.4642,
+  zurich = 47.3769,
 }
-
-export const LatLong = {
-  auckland: [Latitude.auckland, Longitude.auckland],
-  brisbane: [Latitude.brisbane, Longitude.brisbane],
-  melbourne: [Latitude.melbourne, Longitude.melbourne],
-  tokyo: [Latitude.tokyo, Longitude.tokyo],
-  copenhagen: [Latitude.copenhagen, Longitude.copenhagen],
-  toronto: [Latitude.toronto, Longitude.toronto],
-  shanghai: [Latitude.shanghai, Longitude.shanghai],
-  jakarta: [Latitude.jakarta, Longitude.jakarta],
-  moscow: [Latitude.moscow, Longitude.moscow],
-  seoul: [Latitude.seoul, Longitude.seoul],
-  istanbul: [Latitude.istanbul, Longitude.istanbul],
-  cairo: [Latitude.cairo, Longitude.cairo],
-  osaka: [Latitude.osaka, Longitude.osaka],
-  kyoto: [Latitude.kyoto, Longitude.kyoto],
-  madrid: [Latitude.madrid, Longitude.madrid],
-  vancouver: [Latitude.vancouver, Longitude.vancouver],
-  london: [Latitude.london, Longitude.london],
-};
