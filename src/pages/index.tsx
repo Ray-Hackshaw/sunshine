@@ -8,6 +8,7 @@ import { calculateIsohels } from "~/utils/calculateIsohels";
 import type { Pairing } from "~/utils/interfaces";
 import { Loading } from "~/components/Loading";
 import { capitalize } from "~/server/utils/textFormat";
+import Link from "next/link";
 
 const HomePage: NextPage = () => {
   const { data: sunlights, isLoading } = api.isohel.getAllData.useQuery(
@@ -78,6 +79,7 @@ const HomePage: NextPage = () => {
                 <span className="text-slate-500">({uniqueCities})</span>
               </p>
             </div>
+            <Link href="/calculations">next</Link>
           </div>
         </Layout>
       )}
