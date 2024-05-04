@@ -12,7 +12,12 @@ export const calculateIsohels = ({
   );
   filteredItems.map(([firstKey, firstValue]) => {
     filteredItems.map(([secondKey, secondValue]) => {
-      if (firstKey !== secondKey && firstValue === secondValue) {
+      if (
+        firstKey !== secondKey &&
+        firstValue === secondValue &&
+        firstValue !== 0 &&
+        secondValue !== 0
+      ) {
         pairings.push({ firstCity: firstKey, secondCity: secondKey });
       }
     });
