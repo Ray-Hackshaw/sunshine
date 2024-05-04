@@ -8,6 +8,16 @@ import { locationNames } from "~/utils/cities";
 import type { City, CityWithUrl, SunEntryDynamic } from "~/utils/interfaces";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const authHeader = req?.headers.authorization;
+
+  if (
+    !authHeader ||
+    !process.env.CRON_SECRET ||
+    authHeader !== `Bearer ${process.env.CRON_SECRET}`
+  ) {
+    return res.status(401).json({ success: false });
+  }
+
   try {
     const cityResponses: CityWithUrl[] = [];
     locationNames.forEach((city) => {

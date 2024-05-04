@@ -24,8 +24,6 @@ export const updateSunlightPoints = async (
     return acc;
   }, {});
 
-  console.log("in here");
-
   await prisma.sunlight.update({
     where: {
       id: 1,
