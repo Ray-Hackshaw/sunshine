@@ -16,7 +16,6 @@ const CalculationsPage: NextPage = () => (
           <p className="text-2xl font-medium">How the calculations work</p>
           <p>
             <span>
-              {" "}
               <Link
                 className="underline transition-all duration-200 ease-in-out hover:text-sun"
                 href="https://openweathermap.org/"

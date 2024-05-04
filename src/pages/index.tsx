@@ -9,6 +9,9 @@ import type { Pairing } from "~/utils/interfaces";
 import { Loading } from "~/components/Loading";
 import { capitalize } from "~/server/utils/textFormat";
 import Link from "next/link";
+import GithubIcon from "~/components/svg/Github";
+import LinkedInIcon from "~/components/svg/LinkedIn";
+import MailIcon from "~/components/svg/Mail";
 
 const HomePage: NextPage = () => {
   const { data: sunlights, isLoading } = api.isohel.getAllData.useQuery(
@@ -58,17 +61,33 @@ const HomePage: NextPage = () => {
       )}
       {points && !isLoading && (
         <Layout>
-          <div className="mx-auto flex w-full flex-col gap-6 px-4 py-6 font-wix md:min-h-screen md:px-8 md:py-8">
-            <p className="text-cloud">
-              Today there are{" "}
-              <span className={pointCount > 0 ? "text-sun" : "text-cloud"}>
-                {pointCount}
-              </span>{" "}
-              isohels.{" "}
-              <span className="text-slate-500">
-                {pointCount > 0 ? `(${uniqueCities})` : ""}
-              </span>
-            </p>
+          <div className="mx-auto flex w-full max-w-[1920px] flex-col justify-center gap-6 px-4 py-6 font-wix md:min-h-screen md:px-8 md:py-8">
+            <div className="flex w-full justify-between">
+              <p className="text-cloud">
+                Today there are{" "}
+                <span className={pointCount > 0 ? "text-sun" : "text-cloud"}>
+                  {pointCount}
+                </span>{" "}
+                isohels.{" "}
+                <span className="text-slate-500">
+                  {pointCount > 0 ? `(${uniqueCities})` : ""}
+                </span>
+              </p>
+              <div className="flex items-center gap-4">
+                <Link href="https://github.com/Ray-Hackshaw" target="_blank">
+                  <GithubIcon width={24} height={24} />
+                </Link>
+                <Link
+                  href="https://www.linkedin.com/in/rayhackshaw/"
+                  target="_blank"
+                >
+                  <LinkedInIcon width={24} height={24} fill="white" />
+                </Link>
+                <Link href="mailto:ray@rayhackshaw.com">
+                  <MailIcon width={24} height={24} fill="white" />
+                </Link>
+              </div>
+            </div>
             <Map points={points} />
 
             <div className="flex w-full justify-between text-cloud">
