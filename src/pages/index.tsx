@@ -9,9 +9,7 @@ import type { Pairing } from "~/utils/interfaces";
 import { Loading } from "~/components/Loading";
 import { capitalize } from "~/server/utils/textFormat";
 import Link from "next/link";
-import GithubIcon from "~/components/svg/Github";
-import LinkedInIcon from "~/components/svg/LinkedIn";
-import MailIcon from "~/components/svg/Mail";
+import { Icons } from "~/components/Icons";
 
 const HomePage: NextPage = () => {
   const { data: sunlights, isLoading } = api.isohel.getAllData.useQuery(
@@ -32,14 +30,21 @@ const HomePage: NextPage = () => {
     }
   }, [points, sunlights]);
 
-  const uniqueCities = [
-    ...new Set([
-      ...(points?.map((x) => capitalize(x.firstCity)) ?? []),
-      ...(points?.map((x) => capitalize(x.secondCity)) ?? []),
-    ]),
-  ].join(", ");
-
   const pointCount = points?.length ?? 0;
+
+  const UniqueCityList = () => {
+    return (
+      <div className="flex flex-col md:flex-row md:gap-2">
+        {points?.map((x) => (
+          <div key={x.firstCity + x.secondCity} className="flex w-full gap-2">
+            <p>{capitalize(x.firstCity)}</p>
+            <p className="text-sun">─</p>
+            <p>{capitalize(x.secondCity)}</p>
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <>
@@ -62,35 +67,24 @@ const HomePage: NextPage = () => {
       {points && !isLoading && (
         <Layout>
           <div className="mx-auto flex w-full max-w-[1920px] flex-col justify-center gap-6 px-4 py-6 font-wix md:min-h-screen md:px-8 md:py-8">
-            <div className="flex w-full justify-between">
-              <p className="text-cloud">
-                Today there are{" "}
-                <span className={pointCount > 0 ? "text-sun" : "text-cloud"}>
-                  {pointCount}
-                </span>{" "}
-                isohels.{" "}
-                <span className="text-slate-500">
-                  {pointCount > 0 ? `(${uniqueCities})` : ""}
-                </span>
-              </p>
-              <div className="flex items-center gap-4">
-                <Link href="https://github.com/Ray-Hackshaw" target="_blank">
-                  <GithubIcon width={24} height={24} />
-                </Link>
-                <Link
-                  href="https://www.linkedin.com/in/rayhackshaw/"
-                  target="_blank"
-                >
-                  <LinkedInIcon width={24} height={24} fill="white" />
-                </Link>
-                <Link href="mailto:ray@rayhackshaw.com">
-                  <MailIcon width={24} height={24} fill="white" />
-                </Link>
+            <div className="flex w-full items-start justify-between">
+              <div className="flex flex-col gap-4 md:flex-row">
+                <p className="text-sm text-cloud md:text-base">
+                  Today there are{" "}
+                  <span className={pointCount > 0 ? "text-sun" : "text-cloud"}>
+                    {pointCount}
+                  </span>{" "}
+                  isohels.
+                </p>
+                <p className="max-h-20 overflow-y-auto text-sm text-slate-500 md:max-h-max md:text-base">
+                  {pointCount > 0 && <UniqueCityList />}
+                </p>
               </div>
+              <Icons />
             </div>
             <Map points={points} />
 
-            <div className="flex w-full justify-between text-cloud">
+            <div className="flex w-full flex-col justify-between text-sm text-cloud md:flex-row md:text-base">
               <div>
                 <p>
                   Every 24 hours this website updates with the sunlight duration
