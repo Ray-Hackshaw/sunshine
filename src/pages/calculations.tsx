@@ -58,9 +58,11 @@ const CalculationsPage: NextPage = () => (
             application isn&apos;t too accurate to the point where it is not
             showing any data at all.
           </p>
-          <Link className="underline" href="/">
-            ← back
-          </Link>
+          <div>
+            <Link className="underline" href="/">
+              ← back
+            </Link>
+          </div>
         </div>
       </div>
     </Layout>

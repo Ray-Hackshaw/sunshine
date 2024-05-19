@@ -46,6 +46,18 @@ const HomePage: NextPage = () => {
     );
   };
 
+  const TodayMessage = () => {
+    return (
+      <p className="text-xl text-cloud md:text-base">
+        Today there are{" "}
+        <span className={pointCount > 0 ? "text-sun" : "text-cloud"}>
+          {pointCount}
+        </span>{" "}
+        isohels.
+      </p>
+    );
+  };
+
   return (
     <>
       <Head>
@@ -67,25 +79,18 @@ const HomePage: NextPage = () => {
       {points && !isLoading && (
         <Layout>
           <div className="mx-auto flex w-full max-w-[1920px] flex-col justify-center gap-6 px-4 py-6 font-wix md:min-h-screen md:px-8 md:py-8">
-            <div className="flex w-full items-start justify-between">
-              <div className="flex flex-col gap-4 md:flex-row">
-                <p className="text-sm text-cloud md:text-base">
-                  Today there are{" "}
-                  <span className={pointCount > 0 ? "text-sun" : "text-cloud"}>
-                    {pointCount}
-                  </span>{" "}
-                  isohels.
-                </p>
+            <div className="flex w-full flex-col-reverse items-start justify-between md:flex-row">
+              <div className="flex flex-col gap-2 md:flex-row md:gap-4">
+                <TodayMessage />
                 <p className="max-h-20 overflow-y-auto text-sm text-slate-500 md:max-h-max md:text-base">
                   {pointCount > 0 && <UniqueCityList />}
                 </p>
               </div>
-              <Icons />
             </div>
             <Map points={points} />
 
             <div className="flex w-full flex-col justify-between text-sm text-cloud md:flex-row md:text-base">
-              <div>
+              <div className="md:max-w-3xl lg:max-w-full">
                 <p>
                   Every 24 hours this website updates with the sunlight duration
                   of cities from around the world.
@@ -98,9 +103,27 @@ const HomePage: NextPage = () => {
                 </p>
               </div>
 
-              <Link href="/calculations" className="text-cloud underline">
+              <Link
+                href="/calculations"
+                className="pt-2 text-cloud underline md:pt-0"
+              >
                 Read more about the calculations →
               </Link>
+            </div>
+            <div className="flex w-full justify-between gap-4 pb-4 text-cloud md:justify-end md:pb-0">
+              <p>
+                Made by{" "}
+                <span>
+                  <Link
+                    href="https://rayhackshaw.com"
+                    target="_blank"
+                    className="underline"
+                  >
+                    Ray Hackshaw
+                  </Link>
+                </span>
+              </p>
+              <Icons />
             </div>
           </div>
         </Layout>
