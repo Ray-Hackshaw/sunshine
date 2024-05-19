@@ -8,10 +8,9 @@ import { locationNames } from "~/utils/cities";
 import type { City, CityWithUrl, SunEntryDynamic } from "~/utils/interfaces";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const authHeader = req?.headers.authorization;
+  const authHeader = req.headers.authorization;
 
   if (
-    !authHeader ||
     !process.env.CRON_SECRET ||
     authHeader !== `Bearer ${process.env.CRON_SECRET}`
   ) {
