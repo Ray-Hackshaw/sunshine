@@ -8,7 +8,6 @@ import { calculateIsohels } from "~/utils/calculateIsohels";
 import type { Pairing } from "~/utils/interfaces";
 import { Loading } from "~/components/Loading";
 import { Menu } from "~/components/Menu";
-import { MadeBy } from "~/components/MadeBy";
 
 const HomePage: NextPage = () => {
   const { data: sunlights, isLoading } = api.isohel.getAllData.useQuery(
@@ -51,7 +50,6 @@ const HomePage: NextPage = () => {
         <Layout>
           <Map points={points} />
           <Menu points={points} />
-          <MadeBy />
         </Layout>
       )}
     </>

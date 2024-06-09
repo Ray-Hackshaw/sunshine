@@ -59,7 +59,7 @@ const MenuItemToggle = ({ text, open }: { text: string; open: boolean }) => {
 
 const IsohelTitleToggle = ({ open }: { open: boolean }) => {
   return (
-    <div className="pointer-events-none mx-auto flex w-full items-center justify-center py-2 text-2xl md:justify-start md:px-2 lg:justify-between lg:text-3xl">
+    <div className="pointer-events-none mx-auto flex w-full items-center justify-center py-2 text-2xl md:justify-between md:px-2 lg:text-3xl">
       <div className="flex items-center">
         <p className="text-cloud">IS</p>
         {open ? (
@@ -166,7 +166,7 @@ export const Menu = ({ points }: { points: Pairing[] }) => {
             </div>
             <div className="collapse-content px-2">
               <div className="space-y-2 py-2 md:flex md:justify-between md:space-y-0 md:px-2 lg:max-w-full">
-                <p className="w-full max-w-sm text-cloud lg:max-w-xl xl:max-w-2xl">
+                <p className="w-full max-w-sm text-cloud lg:max-w-xl xl:max-w-3xl">
                   If two cities have the same amount of sunlight, they can be
                   connected by an <span className="text-sun">isohel</span>,
                   indicated by a golden line on this map.
@@ -182,6 +182,21 @@ export const Menu = ({ points }: { points: Pairing[] }) => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="flex w-full justify-between border-t border-t-[#88888896] bg-dark p-2 text-cloud md:hidden">
+            <p className="font-wix">
+              Made by{" "}
+              <span>
+                <Link
+                  href="https://rayhackshaw.com"
+                  target="_blank"
+                  className="underline"
+                >
+                  Ray Hackshaw
+                </Link>
+              </span>
+            </p>
+            <Icons />
           </div>
         </div>
       </div>
