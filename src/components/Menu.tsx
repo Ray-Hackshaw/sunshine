@@ -93,8 +93,8 @@ export const Menu = ({ points }: { points: Pairing[] }) => {
 
   const [menuConfig, setMenuConfig] = useState({
     drawerOpen: false,
-    todayOpen: false,
-    aboutOpen: false,
+    todayOpen: true,
+    aboutOpen: true,
   });
 
   const handleMenuClick = () => {
@@ -106,8 +106,14 @@ export const Menu = ({ points }: { points: Pairing[] }) => {
 
   return (
     <>
-      <div className="collapse absolute top-0 w-full border-b border-b-[#88888896] bg-dark font-wix">
-        <input type="checkbox" onClick={handleMenuClick} />
+      <div
+        className="collapse absolute top-0 w-full border-b border-b-[#88888896] bg-dark font-wix"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleMenuClick();
+        }}
+      >
+        <input type="checkbox" checked={menuConfig.drawerOpen} />
         <div className="collapse-title px-2 text-center text-lg">
           <IsohelTitleToggle open={menuConfig.drawerOpen} />
         </div>
@@ -115,6 +121,7 @@ export const Menu = ({ points }: { points: Pairing[] }) => {
           <div className="collapse border-b border-b-[#88888896] font-wix">
             <input
               type="checkbox"
+              checked={menuConfig.todayOpen}
               onClick={(e) => {
                 e.stopPropagation();
                 setMenuConfig({
@@ -137,9 +144,10 @@ export const Menu = ({ points }: { points: Pairing[] }) => {
               </div>
             </div>
           </div>
-          <div className="collapse border-b border-b-[#88888896] font-wix">
+          <div className="collapse w-full border-b border-b-[#88888896] font-wix">
             <input
               type="checkbox"
+              checked={menuConfig.aboutOpen}
               onClick={(e) => {
                 e.stopPropagation();
                 setMenuConfig({
