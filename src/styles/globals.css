@@ -6,6 +6,11 @@ html {
   @apply font-wix;
 }
 
+input[type="”checkbox”"] {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
 .font-bold {
   @apply font-wix font-black;
 }

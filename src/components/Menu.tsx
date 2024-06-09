@@ -97,10 +97,17 @@ export const Menu = ({ points }: { points: Pairing[] }) => {
     aboutOpen: false,
   });
 
+  const handleMenuClick = () => {
+    setMenuConfig({
+      ...menuConfig,
+      drawerOpen: !menuConfig.drawerOpen,
+    });
+  };
+
   return (
     <>
       <div className="collapse absolute top-0 w-full border-b border-b-[#88888896] bg-dark font-wix">
-        <input type="checkbox" />
+        <input type="checkbox" onClick={handleMenuClick} />
         <div className="collapse-title px-2 text-center text-lg">
           <IsohelTitleToggle open={menuConfig.drawerOpen} />
         </div>

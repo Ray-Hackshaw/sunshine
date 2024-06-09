@@ -49,11 +49,9 @@ const HomePage: NextPage = () => {
       )}
       {points && !isLoading && (
         <Layout>
-          <div className="w-full font-wix">
-            <Map points={points} />
-            <Menu points={points} />
-            <MadeBy />
-          </div>
+          <Map points={points} />
+          <Menu points={points} />
+          <MadeBy />
         </Layout>
       )}
     </>
