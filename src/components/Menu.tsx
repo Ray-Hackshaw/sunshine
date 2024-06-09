@@ -59,7 +59,7 @@ const MenuItemToggle = ({ text, open }: { text: string; open: boolean }) => {
 
 const IsohelTitleToggle = ({ open }: { open: boolean }) => {
   return (
-    <div className="pointer-events-none mx-auto flex w-full items-center justify-center py-2 text-2xl md:justify-start md:px-2 lg:justify-between lg:text-3xl">
+    <div className="mx-auto flex w-full items-center justify-center py-2 text-2xl md:justify-start md:px-2 lg:justify-between lg:text-3xl">
       <div className="flex items-center">
         <p className="text-cloud">IS</p>
         {open ? (
