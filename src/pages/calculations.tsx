@@ -2,6 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { Layout } from "~/components/Layout";
+import { PresentationIcon } from "~/components/icons/Presentation";
 
 const CalculationsPage: NextPage = () => (
   <>
@@ -13,9 +14,12 @@ const CalculationsPage: NextPage = () => (
     <Layout>
       <div className="flex min-h-screen w-full items-center justify-center bg-dark py-20">
         <div className="mx-auto w-full max-w-2xl space-y-4 px-4 font-wix text-cloud">
-          <p className="text-xl font-medium md:text-2xl">
-            How the calculations work
-          </p>
+          <div className="flex items-center gap-2">
+            <PresentationIcon />
+            <p className="text-xl font-medium md:text-2xl">
+              How the calculations work
+            </p>
+          </div>
           <p className="text-sm md:text-base">
             <span>
               <Link
@@ -38,7 +42,7 @@ const CalculationsPage: NextPage = () => (
             Each city then gets a sunlight duration assigned to it via{" "}
             <code className="text-sun">sunset - sunrise</code>.
           </p>
-          <p className="mx-auto w-[80%]  border text-sm font-medium md:w-[60%] md:text-base" />
+          <p className="mx-auto w-[80%] border text-sm font-medium md:w-[60%] md:text-base" />
           <p className="text-sm md:text-base">
             Due to the nature of our method of calculation, &apos;true&apos;
             isohels are actually close to/almost impossible to find without

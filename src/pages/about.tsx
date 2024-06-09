@@ -25,20 +25,14 @@ const AboutPage: NextPage = () => (
             sunlight duration for each city and connect any that share an
             isohel.
           </p>
-          <p />
+          <p className="text-xl">Inspiration:</p>
           <p>
-            Stream the song <span className="text-sun">&quot;isohel&quot;</span>{" "}
-            by EDEN on Spotify{" "}
-            <span
-              className="cursor-pointer text-sun underline"
-              onClick={() =>
-                window.open(
-                  "https://open.spotify.com/track/6nl32vTZsMv23myzbRSAea?si=52c86b62503e4862"
-                )
-              }
-            >
-              here.
-            </span>
+            I had the idea for this after listening to a song called
+            &apos;isohel&apos; by EDEN.
+          </p>
+          <p>
+            The idea really resonated with me and I thought it would be cool to
+            build something in homage to this.
           </p>
           <Link className="mt-20 underline" href="/">
             ← back
