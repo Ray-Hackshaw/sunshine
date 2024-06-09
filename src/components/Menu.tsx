@@ -1,61 +1,61 @@
 import Link from "next/link";
-import { useState } from "react";
-import { capitalize } from "~/server/utils/textFormat";
+// import { capitalize } from "~/server/utils/textFormat";
 import { type Pairing } from "~/utils/interfaces";
-import { PlusIcon } from "./icons/Plus";
-import { MinusIcon } from "./icons/Minus";
+// import { PlusIcon } from "./icons/Plus";
+// import { MinusIcon } from "./icons/Minus";
 import { MinusCircleIcon } from "./icons/MinusCircle";
 import { PlusCircleIcon } from "./icons/PlusCircle";
 import { Icons } from "./Icons";
+import { useState } from "react";
 // import { CalculationsModal } from "./CalculationsModal";
 
-const UniqueCityList = ({ points }: { points: Pairing[] }) => {
-  return (
-    <div className="flex max-h-[40px] flex-col overflow-y-auto md:flex-row md:gap-2">
-      {points.map((x) => (
-        <div key={x.firstCity + x.secondCity} className="flex w-full gap-2">
-          <p>{capitalize(x.firstCity)}</p>
-          <p className="text-sun">─</p>
-          <p>{capitalize(x.secondCity)}</p>
-        </div>
-      ))}
-    </div>
-  );
-};
+// const UniqueCityList = ({ points }: { points: Pairing[] }) => {
+//   return (
+//     <div className="flex max-h-[40px] flex-col overflow-y-auto md:flex-row md:gap-2">
+//       {points.map((x) => (
+//         <div key={x.firstCity + x.secondCity} className="flex w-full gap-2">
+//           <p>{capitalize(x.firstCity)}</p>
+//           <p className="text-sun">─</p>
+//           <p>{capitalize(x.secondCity)}</p>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
 
-const TodayMessage = ({ pointCount }: { pointCount: number }) => {
-  if (pointCount === 1) {
-    return (
-      <p className="text-xl text-cloud md:text-base">
-        There is{" "}
-        <span className={pointCount > 0 ? "text-sun" : "text-cloud"}>
-          {pointCount}
-        </span>{" "}
-        isohel.
-      </p>
-    );
-  }
-  return (
-    <p className="text-xl text-cloud md:text-base">
-      Today there are{" "}
-      <span className={pointCount > 0 ? "text-sun" : "text-cloud"}>
-        {pointCount}
-      </span>{" "}
-      isohels.
-    </p>
-  );
-};
+// const TodayMessage = ({ pointCount }: { pointCount: number }) => {
+//   if (pointCount === 1) {
+//     return (
+//       <p className="text-xl text-cloud md:text-base">
+//         There is{" "}
+//         <span className={pointCount > 0 ? "text-sun" : "text-cloud"}>
+//           {pointCount}
+//         </span>{" "}
+//         isohel.
+//       </p>
+//     );
+//   }
+//   return (
+//     <p className="text-xl text-cloud md:text-base">
+//       Today there are{" "}
+//       <span className={pointCount > 0 ? "text-sun" : "text-cloud"}>
+//         {pointCount}
+//       </span>{" "}
+//       isohels.
+//     </p>
+//   );
+// };
 
-const MenuItemToggle = ({ text, open }: { text: string; open: boolean }) => {
-  return (
-    <div className="w-full py-2">
-      <div className="flex items-center gap-2">
-        {open ? <MinusIcon stroke="#E5E5E5" /> : <PlusIcon stroke="#FCA311" />}
-        <div className={open ? "underline" : "text-cloud"}>{text}</div>
-      </div>
-    </div>
-  );
-};
+// const MenuItemToggle = ({ text, open }: { text: string; open: boolean }) => {
+//   return (
+//     <div className="w-full py-2">
+//       <div className="flex items-center gap-2">
+//         {open ? <MinusIcon stroke="#E5E5E5" /> : <PlusIcon stroke="#FCA311" />}
+//         <div className={open ? "underline" : "text-cloud"}>{text}</div>
+//       </div>
+//     </div>
+//   );
+// };
 
 const IsohelTitleToggle = ({ open }: { open: boolean }) => {
   return (
@@ -67,6 +67,7 @@ const IsohelTitleToggle = ({ open }: { open: boolean }) => {
         ) : (
           <PlusCircleIcon className="h-6 w-6" stroke="#FCA311" />
         )}
+
         <p className="text-cloud">HEL</p>
       </div>
       <div className="hidden items-center gap-2 text-xs md:flex">
@@ -89,30 +90,24 @@ const IsohelTitleToggle = ({ open }: { open: boolean }) => {
 };
 
 export const Menu = ({ points }: { points: Pairing[] }) => {
-  const pointCount = points.length;
+  // const pointCount = points.length;
+  console.log(points);
+  const [toggleState, setToggleState] = useState(false);
 
-  const [menuConfig, setMenuConfig] = useState({
-    drawerOpen: false,
-    todayOpen: false,
-    aboutOpen: false,
-  });
-
-  const handleMenuClick = () => {
-    setMenuConfig({
-      ...menuConfig,
-      drawerOpen: !menuConfig.drawerOpen,
-    });
+  const handleToggle = () => {
+    setToggleState(!toggleState);
   };
 
   return (
     <>
       <div className="collapse absolute top-0 w-full border-b border-b-[#88888896] bg-dark font-wix">
-        <input type="checkbox" onClick={handleMenuClick} />
+        <input type="checkbox" onChange={() => handleToggle()} />
         <div className="collapse-title px-2 text-center text-lg">
-          <IsohelTitleToggle open={menuConfig.drawerOpen} />
+          <IsohelTitleToggle open={toggleState} />
         </div>
         <div className="collapse-content px-2">
-          <div className="collapse border-b border-b-[#88888896] font-wix">
+          <div>test</div>
+          {/* <div className="collapse border-b border-b-[#88888896] font-wix">
             <input
               type="checkbox"
               onClick={(e) => {
@@ -165,16 +160,10 @@ export const Menu = ({ points }: { points: Pairing[] }) => {
                 </p>
                 <div>
                   <p>This map updates every 24 hours.</p>
-                  {/* <button
-                    onClick={launchModal}
-                    className="pt-2 text-cloud underline md:pt-0"
-                  >
-                    Read more about the calculations →
-                  </button> */}
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
