@@ -6,8 +6,8 @@ import { Layout } from "~/components/Layout";
 const AboutPage: NextPage = () => (
   <>
     <Head>
-      <title>About</title>
-      <meta name="description" content="About the isohel/sunshine project" />
+      <title>About | Sun Pather</title>
+      <meta name="description" content="About the isohel/sun pather project" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Layout>

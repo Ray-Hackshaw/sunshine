@@ -85,7 +85,7 @@ const HomePage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Sunshine</title>
+        <title>Sun Pather</title>
         <meta
           name="description"
           content="See how the world is connected through sunshine"
