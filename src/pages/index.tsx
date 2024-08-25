@@ -105,7 +105,7 @@ const HomePage: NextPage = () => {
           <div className="flex w-full flex-col gap-2 px-2 py-4 md:flex-row">
             <div className="flex w-full flex-col items-center justify-center space-y-2 font-wix">
               <h1 className="gradient-text text-[2.5rem] md:py-4 md:text-8xl">
-                Sunlight Lines
+                Sun Pather
               </h1>
               <p className="text-xl text-cloud md:text-4xl">
                 Visualise the world&apos;s sunshine.
