@@ -1,7 +1,6 @@
-import * as React from "react";
 import type { SVGProps } from "react";
 
-export const PlusIcon = (props: SVGProps<SVGSVGElement>) => (
+export const Marker = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -14,7 +13,12 @@ export const PlusIcon = (props: SVGProps<SVGSVGElement>) => (
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
-      d="M12 4.5v15m7.5-7.5h-15"
+      d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+    />
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
     />
   </svg>
 );

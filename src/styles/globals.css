@@ -7,7 +7,10 @@ html {
 }
 
 body {
-  overflow: hidden;
+  /* @apply bg-dark;
+   */
+  background-color: #19181a;
+  background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f7f6f9' fill-opacity='0.15' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 input[type="”checkbox”"] {
@@ -42,4 +45,45 @@ input[type="”checkbox”"] {
 
 .mapboxgl-ctrl.mapboxgl-ctrl-attrib.mapboxgl-compact {
   display: none !important;
+}
+
+@layer utilities {
+  .gradient-text {
+    background: -webkit-linear-gradient(#fca311, #ecae49);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* Define the fade-in animation with a duration variable */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Base fade-in class with a default duration */
+.fade-in {
+  animation: fadeIn var(--fade-duration, 1.5s) ease-in;
+}
+
+.fade-out {
+  animation: fadeOut var(--fade-duration, 1.5s) ease-in;
+}
+
+.textured {
+  background-color: #f0edf5;
+  background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.07' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
 }

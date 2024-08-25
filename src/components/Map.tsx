@@ -137,7 +137,7 @@ export const Map = ({ points }: { points: Pairing[] }) => {
   return (
     <div
       id="map"
-      className="mx-auto h-[100vh] w-full overflow-hidden rounded-md md:h-[100vh]"
+      className="fade-in mx-auto flex h-[45vh] w-full items-center justify-center overflow-hidden rounded-md border-2 border-sun md:h-[90vh]"
     />
   );
 };
