@@ -21,9 +21,9 @@ export const Map = ({ points }: { points: Pairing[] }) => {
       const isMobile = screenW <= 768;
 
       const mapConfig = {
-        zoom: isMobile ? 1.5 : 1.85,
+        zoom: 3,
         minZoom: isMobile ? 1.5 : 1.75,
-        center: isMobile ? [14.7, 45.9] : [20, 15],
+        center: isMobile ? [14.7, 45.9] : [12, 45],
       };
 
       const newMap = new mapboxgl.Map({

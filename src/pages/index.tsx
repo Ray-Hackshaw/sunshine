@@ -23,14 +23,14 @@ const UniqueCityList = ({ points }: { points: Pairing[] }) => {
     <div className="flex flex-col gap-1">
       {points.map((x) => (
         <div key={x.firstCity + x.secondCity} className="flex w-full gap-2">
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 text-cloud/80">
             <Marker />
             <p className="text-cloud">{capitalize(x.firstCity)}</p>
           </div>
           <p className="text-sun">
             <ArrowsRightLeft />
           </p>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 text-cloud/80">
             <Marker />
             <p className="text-cloud">{capitalize(x.secondCity)}</p>
           </div>
@@ -113,9 +113,9 @@ const HomePage: NextPage = () => {
               <div className="flex items-center gap-2 bg-dark p-1">
                 <div>
                   <p className="gradient-text text-2xl font-bold">`isohel`</p>
-                  <p>/&apos;ʌɪsə(ʊ)hɛl/</p>
+                  <p className="text-cloud/90">/&apos;ʌɪsə(ʊ)hɛl/</p>
                 </div>
-                <p className="leading-tight">
+                <p className="leading-tight text-cloud">
                   a line on a map connecting points having the same duration of
                   sunshine.
                 </p>
